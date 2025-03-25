@@ -5,7 +5,7 @@
 library quill_delta;
 
 import 'dart:math' as math;
-import 'dart:ui' show hashList, hashValues;
+import 'dart:ui' show hashList;
 
 import 'package:collection/collection.dart';
 
@@ -138,10 +138,10 @@ class Operation {
   @override
   int get hashCode {
     if (_attributes != null && _attributes!.isNotEmpty) {
-      int attrsHash = hashList(_attributes!.entries.map((e) => hashValues(e.key, e.value)));
-      return hashValues(key, value, attrsHash);
+      int attrsHash = hashList(_attributes!.entries.map((e) => Object.hash(e.key, e.value)));
+      return Object.hash(key, value, attrsHash);
     }
-    return hashValues(key, value);
+    return Object.hash(key, value);
   }
 
   @override
