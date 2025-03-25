@@ -5,7 +5,6 @@
 library quill_delta;
 
 import 'dart:math' as math;
-import 'dart:ui' show hashList;
 
 import 'package:collection/collection.dart';
 
@@ -138,7 +137,7 @@ class Operation {
   @override
   int get hashCode {
     if (_attributes != null && _attributes!.isNotEmpty) {
-      int attrsHash = hashList(_attributes!.entries.map((e) => Object.hash(e.key, e.value)));
+      int attrsHash = Object.hashAll(_attributes!.entries.map((e) => Object.hash(e.key, e.value)));
       return Object.hash(key, value, attrsHash);
     }
     return Object.hash(key, value);
@@ -271,7 +270,7 @@ class Delta {
   }
 
   @override
-  int get hashCode => hashList(_operations);
+  int get hashCode => Object.hashAll(_operations);
 
   /// Retain [count] of characters from current position.
   void retain(int count, [Map<String, dynamic>? attributes]) {

@@ -2,7 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dart:ui' show hashList;
 import 'package:collection/collection.dart';
 
 /// Scope of a style attribute, defines context in which an attribute can be
@@ -310,7 +309,7 @@ class NotusStyle {
   @override
   int get hashCode {
     final hashes = _data.entries.map((entry) => Object.hash(entry.key, entry.value));
-    return hashList(hashes);
+    return Object.hashAll(hashes);
   }
 
   @override
@@ -440,6 +439,6 @@ class EmbedAttribute extends NotusAttribute<Map<String, dynamic>?> {
     } else {
       objects.add(value!);
     }
-    return hashList(objects);
+    return Object.hashAll(objects);
   }
 }
